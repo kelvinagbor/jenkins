@@ -1,12 +1,9 @@
 pipeline{
     agent any
-<<<<<<< HEAD
-=======
     environment{
         version = '8.3.7'
         configuration = 'prodcution'
     }
->>>>>>> main
     stages{
         stage('Build'){
             steps{
@@ -20,10 +17,7 @@ pipeline{
             }
         }
         stage('deploy'){
-<<<<<<< HEAD
-=======
-            BRANCH_NAME = 'main'
->>>>>>> main
+
             steps{
                 echo "Deploy testing"
                 echo "Deploying ${configuration}_${version}"
