@@ -1,5 +1,9 @@
 pipeline{
     agent any
+    tools{
+        maven Maven
+        gradle Gradle 
+    }
     environment{
         version = '8.3.7'
         configuration = 'prodcution'
@@ -9,6 +13,8 @@ pipeline{
             steps{
                   echo "build testing"
                   echo "This build is version ${version}"
+                  sh 'mvn install'
+                  sh 'gradle install'
             }
         }
         stage('Test'){
@@ -17,7 +23,7 @@ pipeline{
             }
         }
         stage('deploy'){
-
+            BRANCH_NAME = 'main'
             steps{
                 echo "Deploy testing"
                 echo "Deploying ${configuration}_${version}"
