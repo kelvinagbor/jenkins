@@ -1,9 +1,14 @@
 pipeline{
     agent any
+    environment{
+        version = '8.3.7'
+        configuration = 'prodcution'
+    }
     stages{
         stage('Build'){
             steps{
                   echo "build testing"
+                  echo "This build is version ${version}"
             }
         }
         stage('Test'){
@@ -14,6 +19,7 @@ pipeline{
         stage('deploy'){
             steps{
                 echo "Deploy testing"
+                echo "Deploying ${configuration}_${version}"
             }
         }
         stage('Cleanup'){
