@@ -12,7 +12,7 @@ pipeline{
             steps{
                   echo "build testing"
                   echo "This build is version ${version}"
-                  sh "mvn clean install"
+                  sh "mvn install"
             }
         }
         stage('Test'){
