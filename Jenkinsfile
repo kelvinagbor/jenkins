@@ -1,7 +1,7 @@
 pipeline{
     agent any
     tools{
-        maven Maven
+        maven 'Maven'
     }
     environment{
         version = '8.3.7'
@@ -12,7 +12,7 @@ pipeline{
             steps{
                   echo "build testing"
                   echo "This build is version ${version}"
-                  sh 'mvn clean install '
+                  sh "mvn clean install"
             }
         }
         stage('Test'){
