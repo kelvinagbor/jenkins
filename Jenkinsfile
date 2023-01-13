@@ -17,6 +17,7 @@ pipeline{
             }
         }
         stage('deploy'){
+            BRANCH_NAME = 'main'
             steps{
                 echo "Deploy testing"
                 echo "Deploying ${configuration}_${version}"
