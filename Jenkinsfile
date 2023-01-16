@@ -38,7 +38,6 @@ pipeline{
             }
         }
         stage('deploy'){
-            BRANCH_NAME = 'main'
             steps{
                 script{
                     gv.deploy()
