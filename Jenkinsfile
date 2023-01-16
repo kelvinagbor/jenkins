@@ -1,7 +1,10 @@
+def gv
+
 pipeline{
     agent any
-    tools{
-        maven 'Maven'
+    parameters{
+         choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: 'different build versions')
+        booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
     environment{
         version = '8.3.7'
@@ -12,7 +15,7 @@ pipeline{
             steps{
                   echo "build testing"
                   echo "This build is version ${version}"
-                  sh "mvn install"
+                
             }
         }
         stage('Test'){
