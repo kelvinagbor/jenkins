@@ -1,7 +1,10 @@
+def gv
+
 pipeline{
     agent any
-    tools{
-        maven Maven
+    parameters{
+         choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: 'different build versions')
+        booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
 
     environment{
@@ -9,22 +12,38 @@ pipeline{
         configuration = 'prodcution'
     }
     stages{
+        stage('init'){
+            steps{
+                script{
+                    gv = load "script.groovy"
+                }
+            }
+        }
         stage('Build'){
             steps{
-                  echo "build testing"
-                  echo "This build is version ${version}"
-                  sh 'mvn install'
+                script{
+                    gv.buildApp()
+                }
+                
             }
         }
         stage('Test'){
+            when{
+                expression{
+                    params.executeTests
+                }
+            }
             steps{
-                echo "Test testing"
+                script{
+                    gv.test()
+                }
             }
         }
         stage('deploy'){
             steps{
-                echo "Deploy testing"
-                echo "Deploying ${configuration}_${version}"
+                script{
+                    gv.deploy()
+                }
             }
         }
         stage('Cleanup'){
